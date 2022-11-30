@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    .pivot {
+      transform: translate(500px, 500px);
+    }
+    </style>
+</head>
+<body>
+
+<svg width="1000" height="1000" id="svg">
+  <circle cx="0" cy="0" r="450" class="pivot"
+  stroke="green" stroke-width="4" fill="white" />
+</svg>
+ 
+</body>
+<script>
+  const data = 
+`A,B,C,D,E
+6,7,6,8,2
+7,3,4,9,3
+8,2,5,7.5,4`;
+
+  const R = 450;
+  const MAX = 10;
+  const INIT_ANGLE = 0 + Math.PI / 2;
+
+  rows = data.split('\n');
+  for(let i = 0; i < rows.length; i++) {
+    rows[i] = rows[i].split(',');
+  }
+  nRow = rows.length;
+  nCol = rows[0].length;
+  nVal = nRow - 1;
+  cols = []
+  for(let i = 0; i < nCol; i++) {
+    col = [rows[0][i]];
+    for(let j = 1; j < nRow; j++) {
+      col.push(parseFloat(rows[j][i]));
+    }
+    cols.push(col);
+  }
+
+  svg = document.getElementById("svg");
+
+  angle = INIT_ANGLE;
+  dAngle = 2 * Math.PI / nCol;
+  dpAngle = dAngle / nVal;
+
+  angle += dAngle;
+  x2 = R * Math.sin(angle);
+  y2 = -R * Math.cos(angle);
+  line = Line(0, 0, x2, y2);
+  svg.innerHTML += line;
+
+  for(let i = 0; i < nCol; i++) {
+    angle += dAngle;
+    x2 = R * Math.sin(angle);
+    y2 = -R * Math.cos(angle);
+    line = Line(0, 0, x2, y2);
+    svg.innerHTML += line;
+
+    pAngle = angle - dAngle - dpAngle / 2;
+    sumVal = 0;
+    points = '';
+    for(let j = 1; j <= nVal; j++) {
+      pAngle += dpAngle;
+      x = R * Math.sin(pAngle) * cols[i][j] / MAX;
+      y = -R * Math.cos(pAngle) * cols[i][j] / MAX;
+      point = Point(x, y);
+      points += point;
+      sumVal += cols[i][j];
+    }
+    avgVal = sumVal / nVal;
+    pAngle = angle - dAngle / 2;
+    x = R * Math.sin(pAngle) * avgVal / MAX;
+    y = -R * Math.cos(pAngle) * avgVal / MAX;
+    point = AVGPoint(x, y);
+    svg.innerHTML += point;
+
+    svg.innerHTML += points;
+  }
+
+  //draw Label
+  for (let pct = 10; pct <= 100; pct += 10) {
+    x = R * pct / 100;
+    y = 0;
+    label = CircleLabel(x, y, `${pct}%`);
+    svg.innerHTML += label;
+    console.log(label);
+  }
+
+  function Line(x1, y1, x2, y2) {
+    return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" class="pivot" style="stroke:rgb(255,0,0);stroke-width:2" />`;
+  }
+
+  function Point(x, y) {
+    return `<circle cx="${x}" cy="${y}" r="5" class="pivot" stroke="black" stroke-width="0" fill="black" />`
+  }
+
+  function AVGPoint(x, y) {
+    return `<circle cx="${x}" cy="${y}" r="10" class="pivot" stroke="black" stroke-width="0" fill="red" />`
+  }
+
+  function CircleLabel(x, y, txt) {
+    return `<circle cx="${x}" cy="${y}" r="15" class="pivot" stroke="black" stroke-width="0" fill="black" />
+    <text x="${x}" y="${y}" class="pivot text" fill="white" dominant-baseline="middle" text-anchor="middle" font-size="12px" font-family="Arial">${txt}</text>`
+  }
+</script>
+</html>
+
