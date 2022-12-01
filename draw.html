@@ -3,16 +3,13 @@
 <head>
   <style>
     .pivot {
-      transform: translate(500px, 500px);
+      transform: translate(550px, 550px);
     }
     </style>
 </head>
 <body>
 
-<svg width="1000" height="1000" id="svg">
-  <circle cx="0" cy="0" r="450" class="pivot"
-  stroke="green" stroke-width="4" fill="white" />
-</svg>
+<svg width="1100" height="1100" id="svg"></svg>
  
 </body>
 <script src="/utils.js"></script>
@@ -38,23 +35,34 @@
     cols.push(col);
   }
 
+  /////////////////////////////////////
   svg = document.getElementById("svg");
 
   angle = INIT_ANGLE;
   dAngle = 2 * Math.PI / nCol;
   dpAngle = dAngle / nVal;
 
-  angle += dAngle;
-  x2 = R * Math.sin(angle);
-  y2 = -R * Math.cos(angle);
-  line = Line(0, 0, x2, y2);
-  svg.innerHTML += line;
-  
+  /////////////////////////////////////
+  // draw circles
+  RR = R * 10 / 9
+  bigCircle = Circle(0, 0, RR, 4, 'black');
+  svg.innerHTML += bigCircle;
+
+  for(pct = 100; pct >= 10; pct -= 10) {
+    circle = Circle(0, 0, R * pct / 100, 2, '#dddddd');
+    svg.innerHTML += circle;
+  }
+
+
+
+  /////////////////////////////////////
+  // draw points
+  avgPoints = [];
   for(let i = 0; i < nCol; i++) {
     angle += dAngle;
-    x2 = R * Math.sin(angle);
-    y2 = -R * Math.cos(angle);
-    line = Line(0, 0, x2, y2);
+    x2 = RR * Math.sin(angle);
+    y2 = -RR * Math.cos(angle);
+    line = Line(0, 0, x2, y2, 1);
     svg.innerHTML += line;
 
     pAngle = angle - dAngle - dpAngle / 2;
@@ -72,24 +80,35 @@
     pAngle = angle - dAngle / 2;
     x = R * Math.sin(pAngle) * avgVal / MAX;
     y = -R * Math.cos(pAngle) * avgVal / MAX;
-    point = AVGPoint(x, y);
-    svg.innerHTML += point;
+    avgPoint = AVGPoint(x, y);
+    svg.innerHTML += avgPoint;
+    avgPoints.push([x, y]);
 
     svg.innerHTML += points;
   }
 
   //draw Label
-  for (let pct = 10; pct <= 100; pct += 10) {
+    for (let pct = 10; pct < 100; pct += 10) {
     x = R * pct / 100;
     y = 0;
     label = CircleLabel(x, y, `${pct}%`);
     svg.innerHTML += label;
-    console.log(label);
   }
+  
+  //draw avg line
+  avgPoints.push(avgPoints[0]);
+  avgLines = '';
+  for(let i = 1; i <= nCol; i++) {
+    console.log(avgPoints[i - 1]);
+    line = Line(...avgPoints[i - 1], ...avgPoints[i], 2, 'red');
+    avgLines += line;
+  }
+  svg.innerHTML += avgLines;
+
 
   //draw curve
-  curve = CircleCurve(0, 0, R, 'curve');
-  curveText = CurveText('curve', 'Doan Sinh Man');
+  curve = CircleCurve(0, 0, RR - 10, 'curve');
+  curveText = CurveText('curve', 'Doan\n Sinh Man');
   svg.innerHTML += curve + curveText;
 </script>
 </html>

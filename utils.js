@@ -1,13 +1,13 @@
-function Line(x1, y1, x2, y2) {
-return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" class="pivot" style="stroke:rgb(255,0,0);stroke-width:2" />`;
+function Line(x1, y1, x2, y2, w=2, color='black') {
+return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" class="pivot" style="stroke:${color};stroke-width:${w}" />`;
 }
 
 function Point(x, y) {
-return `<circle cx="${x}" cy="${y}" r="5" class="pivot" stroke="black" stroke-width="0" fill="black" />`
+return `<circle cx="${x}" cy="${y}" r="3" class="pivot" stroke="black" stroke-width="0" fill="black" />`
 }
 
 function AVGPoint(x, y) {
-return `<circle cx="${x}" cy="${y}" r="10" class="pivot" stroke="black" stroke-width="0" fill="red" />`
+return `<circle cx="${x}" cy="${y}" r="5" class="pivot" stroke="black" stroke-width="0" fill="red" />`
 }
 
 function CircleLabel(x, y, txt) {
@@ -32,4 +32,9 @@ function CurveText(curveId, txt) {
     ${txt}
 </textPath>
 </text>`
+}
+
+function Circle(x, y, r, w, color='black') {
+    return `<circle cx="${x}" cy="${y}" r="${r}" class="pivot"
+stroke="${color}" stroke-width="${w}" fill="white" />`
 }
