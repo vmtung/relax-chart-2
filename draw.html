@@ -3,21 +3,28 @@
 <head>
   <style>
     .pivot {
-      transform: translate(550px, 550px);
+      transform: translate(600px, 600px);
     }
-    </style>
+    .rotator {
+      transform-origin: 600px 600px;
+    }
+  </style>
 </head>
 <body>
 
-<svg width="1100" height="1100" id="svg"></svg>
+<svg width="1200" height="1200" id="svg"></svg>
  
 </body>
 <script src="/utils.js"></script>
 <script src="/data.js"></script>
 <script>
-  const R = 450;
+  const R = 400;
   const MAX = 10;
-  const INIT_ANGLE = 0 + Math.PI / 2;
+  const INIT_ANGLE = Math.PI / 2;
+
+  RR = R * 10 / 9;
+  RRR = RR * 10 / 9;
+  RRRR = RRR * 1.2;
 
   rows = DATA.split('\n');
   for(let i = 0; i < rows.length; i++) {
@@ -44,7 +51,10 @@
 
   /////////////////////////////////////
   // draw circles
-  RR = R * 10 / 9
+  bigCircle = Circle(0, 0, RRRR, 4, 'black');
+  svg.innerHTML += bigCircle;
+  bigCircle = Circle(0, 0, RRR, 4, 'black');
+  svg.innerHTML += bigCircle;
   bigCircle = Circle(0, 0, RR, 4, 'black');
   svg.innerHTML += bigCircle;
 
@@ -54,9 +64,8 @@
   }
 
 
-
   /////////////////////////////////////
-  // draw points
+  // draw points and line
   avgPoints = [];
   for(let i = 0; i < nCol; i++) {
     angle += dAngle;
@@ -85,10 +94,49 @@
     avgPoints.push([x, y]);
 
     svg.innerHTML += points;
+
+    // draw col name
+    colName = ColumnName(RR - 15, angle - dAngle / 2, cols[i][0]);
+    svg.innerHTML += colName;
+  }
+
+  //draw groups
+  angle = INIT_ANGLE;
+  for(let group of GROUPS) {
+    let [size, text] = group;
+    x = RRR * Math.sin(angle + dAngle * size);
+    y = -RRR * Math.cos(angle + dAngle * size);
+    line = Line(0, 0, x, y, 1, color='black');
+    svg.innerHTML += line;
+
+    colName = ColumnName(RRR - 25, angle + dAngle * size / 2, text, 15);
+    svg.innerHTML += colName;
+    angle += dAngle * size;
+  }
+
+  //draw classes
+  angle = INIT_ANGLE;
+  let idx = 0;
+  for(let cl of CLASSES) {
+      let size = 0;
+      let [nGroup, text, color] = cl;
+      for(let i = 0; i < nGroup; i++) {
+        size += GROUPS[idx][0];
+        idx++;
+      }
+
+    x = RRRR * Math.sin(angle + dAngle * size);
+    y = -RRRR * Math.cos(angle + dAngle * size);
+    line = Line(0, 0, x, y, 3, color='black');
+    svg.innerHTML += line;
+
+    colName = ColumnName_v2(RRRR - 55, angle + dAngle * size / 2, text, 35);
+    svg.innerHTML += colName;
+    angle += dAngle * size;
   }
 
   //draw Label
-    for (let pct = 10; pct < 100; pct += 10) {
+  for (let pct = 10; pct < 100; pct += 10) {
     x = R * pct / 100;
     y = 0;
     label = CircleLabel(x, y, `${pct}%`);
@@ -99,17 +147,11 @@
   avgPoints.push(avgPoints[0]);
   avgLines = '';
   for(let i = 1; i <= nCol; i++) {
-    console.log(avgPoints[i - 1]);
     line = Line(...avgPoints[i - 1], ...avgPoints[i], 2, 'red');
     avgLines += line;
   }
   svg.innerHTML += avgLines;
 
-
-  //draw curve
-  curve = CircleCurve(0, 0, RR - 10, 'curve');
-  curveText = CurveText('curve', 'Doan\n Sinh Man');
-  svg.innerHTML += curve + curveText;
 </script>
 </html>
 
