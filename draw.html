@@ -125,6 +125,11 @@
         idx++;
       }
 
+    // draw color
+    segment = CircleSegment(0, 0, (RRR + RRRR) / 2, RRRR - RRR, Math.PI * 2 * size / nCol, angle, color);
+    svg.innerHTML += segment;
+  
+
     x = RRRR * Math.sin(angle + dAngle * size);
     y = -RRRR * Math.cos(angle + dAngle * size);
     line = Line(0, 0, x, y, 3, color='black');

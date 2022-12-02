@@ -15,30 +15,6 @@ return `<circle cx="${x}" cy="${y}" r="15" class="pivot" stroke="black" stroke-w
 <text x="${x}" y="${y}" class="pivot text" fill="white" dominant-baseline="middle" text-anchor="middle" font-size="12px" font-family="Arial">${txt}</text>`
 }
 
-// function CircleCurve(x, y, r, id) {
-//     return `<path id=${id} class="pivot" fill="transparent"
-// d="
-// M ${x}, ${y}
-// m ${-r}, 0
-// a ${r},${r} 0 1,0 ${2 * r},0
-// a ${r},${r} 0 1,0 ${-2 * r},0
-// "
-// />`
-// }
-
-// function CurveText(curveId, txt) {
-//     // let lines = txt.split('\n');
-//     // let html = '';
-//     // for(let line of lines) {
-
-//     // }
-//     return `<text width="500">
-// <textPath alignment-baseline="top" xlink:href="#${curveId}" fill="red" dominant-baseline="middle" text-anchor="middle" startOffset="50%" font-size="12px" font-family="Arial">
-//     ${txt}
-// </textPath>
-// </text>`
-// }
-
 function Circle(x, y, r, w, color='black') {
     return `<circle cx="${x}" cy="${y}" r="${r}" class="pivot"
 stroke="${color}" stroke-width="${w}" fill="white" />`
@@ -60,7 +36,7 @@ function ColumnName(r, angle, txt, size=11) {
 }
 
 function ColumnName_v2(r, angle, txt, size=11) {
-    uuid = "uuid" + parseInt(Math.random() * 1000000);
+    uuid = "uuid" + parseInt(Math.random() * 100000000);
     deg = (angle - Math.PI / 2) * 180 / Math.PI;
 
     path = `<path id="${uuid}" fill="transparent" class="rotator" transform="rotate(${deg})"
@@ -73,8 +49,17 @@ function ColumnName_v2(r, angle, txt, size=11) {
 `
     return `${path}
     <text width="500" >
-        <textPath alignment-baseline="top" xlink:href="#${uuid}" class="pivot" fill="black" dominant-baseline="middle" startOffset="50%" text-anchor="middle" font-size="${size}px" font-family="Arial">
+        <textPath alignment-baseline="top" xlink:href="#${uuid}" class="pivot" fill="white" dominant-baseline="middle" startOffset="50%" text-anchor="middle" font-size="${size}px" font-family="Arial">
             ${txt.split('').join(' ')}
         </textPath>
     </text>`;
+}
+
+function CircleSegment(x, y, r, w, angel, angelOffset, color='black') {
+    let c = r * 2 * Math.PI;
+    let strokeC = angel * r;
+    let remainC = c - strokeC;
+    return `<g class="rotator" transform="rotate(${angelOffset * 180 / Math.PI - 90})">
+    <circle class="pivot" cx="${x}" cy="${y}" r="${r}" stroke="${color}" stroke-width="${w}" stroke-dasharray="${strokeC} ${remainC}" fill="transparent" />
+</g>`;
 }
