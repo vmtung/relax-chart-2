@@ -49,8 +49,8 @@ function ColumnName_v2(r, angle, txt, size=11) {
 `
     return `${path}
     <text width="500" >
-        <textPath alignment-baseline="top" xlink:href="#${uuid}" class="pivot" fill="white" dominant-baseline="middle" startOffset="50%" text-anchor="middle" font-size="${size}px" font-family="Arial">
-            ${txt.split('').join(' ')}
+        <textPath alignment-baseline="top" xlink:href="#${uuid}" class="pivot" fill="white" dominant-baseline="middle" startOffset="50%" text-anchor="middle" font-size="${size}px" font-family="Arial" letter-spacing="15px">
+            ${txt}
         </textPath>
     </text>`;
 }

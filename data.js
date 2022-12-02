@@ -22,4 +22,4 @@ const DATA =
 9,8,2,7,6,6,3,10,9,5,3,5,9,10,2,3,4,9,6,8,2,7,8,9,2,8,8,7,6,2,9,9,4,9,4,6,6,4,6,5`;
 
 const GROUPS = [[3, 'Team Facilitator'], [2, 'Team Lead(s)'], [3, 'Product Owner'], [3, 'Management'], [5, 'Team Dynamics'], [3, 'Team Facilitator'], [2, 'Team Lead(s)'], [3, 'Product Owner'], [3, 'Management'], [5, 'Team Dynamics'], [3, 'Doan'], [5, 'Sinh Man']];
-const CLASSES = [[4, 'LEADERSHIP', 'purple'], [1, 'CULTURE', 'red'], [2, 'FOUDATION', 'blue'], [3, 'CLARITY', 'orange'], [2, 'PERFORMANCE', 'green']];
+const CLASSES = [[4, 'LEADERSHIP', '#614d9c'], [1, 'CULTURE', '#da3b31'], [2, 'FOUNDATION', '#3953a0'], [3, 'CLARITY', '#efaa54'], [2, 'PERFORMANCE', '#4f8c4c']];

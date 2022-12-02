@@ -24,7 +24,7 @@
 
   RR = R * 10 / 9;
   RRR = RR * 10 / 9;
-  RRRR = RRR * 1.2;
+  RRRR = RRR * 1.18;
 
   rows = DATA.split('\n');
   for(let i = 0; i < rows.length; i++) {
@@ -51,8 +51,8 @@
 
   /////////////////////////////////////
   // draw circles
-  bigCircle = Circle(0, 0, RRRR, 4, 'black');
-  svg.innerHTML += bigCircle;
+  // bigCircle = Circle(0, 0, RRRR, 4, 'black');
+  // svg.innerHTML += bigCircle;
   bigCircle = Circle(0, 0, RRR, 4, 'black');
   svg.innerHTML += bigCircle;
   bigCircle = Circle(0, 0, RR, 4, 'black');
@@ -109,7 +109,7 @@
     line = Line(0, 0, x, y, 1, color='black');
     svg.innerHTML += line;
 
-    colName = ColumnName(RRR - 25, angle + dAngle * size / 2, text, 15);
+    colName = ColumnName(RRR - 25, angle + dAngle * size / 2, text, 16);
     svg.innerHTML += colName;
     angle += dAngle * size;
   }
@@ -126,16 +126,16 @@
       }
 
     // draw color
-    segment = CircleSegment(0, 0, (RRR + RRRR) / 2, RRRR - RRR, Math.PI * 2 * size / nCol, angle, color);
+    segment = CircleSegment(0, 0, (RRR + RRRR) / 2 + 2, RRRR - RRR, Math.PI * 2 * size / nCol, angle, color);
     svg.innerHTML += segment;
   
 
-    x = RRRR * Math.sin(angle + dAngle * size);
-    y = -RRRR * Math.cos(angle + dAngle * size);
-    line = Line(0, 0, x, y, 3, color='black');
+    x = RRR * Math.sin(angle + dAngle * size);
+    y = -RRR * Math.cos(angle + dAngle * size);
+    line = Line(0, 0, x, y, 4, color='black');
     svg.innerHTML += line;
 
-    colName = ColumnName_v2(RRRR - 55, angle + dAngle * size / 2, text, 35);
+    colName = ColumnName_v2(RRRR - 50, angle + dAngle * size / 2, text, 35);
     svg.innerHTML += colName;
     angle += dAngle * size;
   }
