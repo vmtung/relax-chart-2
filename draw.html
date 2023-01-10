@@ -78,16 +78,21 @@
     sumVal = 0;
     points = '';
     nonZeroVal = 0;
+
     for(let j = 1; j <= nVal; j++) {
-      pAngle += dpAngle;
+      if(cols[i][j] > 0) {
+        nonZeroVal++;
+      }
+    }
+    _dpAngle = dpAngle * nVal / Math.max(nonZeroVal, 1);
+
+    for(let j = 1; j <= nVal; j++) {
+      pAngle += _dpAngle;
       x = R * Math.sin(pAngle) * cols[i][j] / MAX;
       y = -R * Math.cos(pAngle) * cols[i][j] / MAX;
       point = Point(x, y);
       points += point;
       sumVal += cols[i][j];
-      if(cols[i][j] > 0) {
-        nonZeroVal++;
-      }
     }
     avgVal = sumVal / Math.max(nonZeroVal, 1);
     pAngle = angle - dAngle / 2;
