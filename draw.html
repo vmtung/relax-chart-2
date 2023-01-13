@@ -96,6 +96,8 @@
         sumVal += cols[i][j];
       }
     }
+    svg.innerHTML += points;
+    
     avgVal = sumVal / Math.max(nonZeroVal, 1);
     pAngle = angle - dAngle / 2;
     x = R * Math.sin(pAngle) * avgVal / MAX;
@@ -103,8 +105,6 @@
     avgPoint = AVGPoint(x, y);
     svg.innerHTML += avgPoint;
     avgPoints.push([x, y]);
-
-    svg.innerHTML += points;
 
     // draw col name
     colName = ColumnName(RR - 15, angle - dAngle / 2, cols[i][0], 10);
