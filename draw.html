@@ -87,12 +87,14 @@
     _dpAngle = dpAngle * nVal / Math.max(nonZeroVal, 1);
 
     for(let j = 1; j <= nVal; j++) {
-      pAngle += _dpAngle;
-      x = R * Math.sin(pAngle) * cols[i][j] / MAX;
-      y = -R * Math.cos(pAngle) * cols[i][j] / MAX;
-      point = Point(x, y);
-      points += point;
-      sumVal += cols[i][j];
+      if(cols[i][j] > 0) {        
+        pAngle += _dpAngle;
+        x = R * Math.sin(pAngle) * cols[i][j] / MAX;
+        y = -R * Math.cos(pAngle) * cols[i][j] / MAX;
+        point = Point(x, y);
+        points += point;
+        sumVal += cols[i][j];
+      }
     }
     avgVal = sumVal / Math.max(nonZeroVal, 1);
     pAngle = angle - dAngle / 2;
@@ -105,7 +107,7 @@
     svg.innerHTML += points;
 
     // draw col name
-    colName = ColumnName(RR - 15, angle - dAngle / 2, cols[i][0]);
+    colName = ColumnName(RR - 15, angle - dAngle / 2, cols[i][0], 10);
     svg.innerHTML += colName;
   }
 
