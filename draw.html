@@ -106,8 +106,14 @@
     svg.innerHTML += avgPoint;
     avgPoints.push([x, y]);
 
+    let colAngle = angle - dAngle / 2
+    let colY = RR - 15
+    if (colAngle >= Math.PI / 2 && colAngle <= 3 * Math.PI / 2) {
+      colAngle += Math.PI;
+      colY = -colY + 10;
+    }
     // draw col name
-    colName = ColumnName(RR - 15, angle - dAngle / 2, cols[i][0], 10);
+    colName = ColumnName(colY, colAngle, cols[i][0], 10);
     svg.innerHTML += colName;
   }
 
@@ -119,8 +125,14 @@
     y = -RRR * Math.cos(angle + dAngle * size);
     line = Line(0, 0, x, y, 1, color='black');
     svg.innerHTML += line;
+    let colAngle = angle + dAngle * size / 2
+    let colY = RRR - 25
+    if (colAngle >= Math.PI / 2 && colAngle <= 3 * Math.PI / 2) {
+      colAngle += Math.PI;
+      colY = -colY;
+    }
 
-    colName = ColumnName(RRR - 25, angle + dAngle * size / 2, text, 16);
+    colName = ColumnName(colY, colAngle, text, 16);
     svg.innerHTML += colName;
     angle += dAngle * size;
   }
@@ -146,7 +158,14 @@
     line = Line(0, 0, x, y, 4, color='black');
     svg.innerHTML += line;
 
-    colName = ColumnName_v2(RRRR - 50, angle + dAngle * size / 2, text, 35);
+    let colAngle = angle + dAngle * size / 2
+    let colY = RRRR - 50
+    if (colAngle >= Math.PI / 2 && colAngle < 3 * Math.PI / 2) {
+      colAngle += Math.PI;
+      colY = -colY;
+    }
+
+    colName = ColumnName_v2(colY, colAngle, text, 35);
     svg.innerHTML += colName;
     angle += dAngle * size;
   }
