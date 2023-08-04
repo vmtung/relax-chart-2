@@ -1,67 +1,44 @@
-const DATA = `Happiness,Collaboration,Trust &_Respect,Creativity &_Innovation,Account-_ability,Vision &_Purpose,Goals &_Outcome,Roadmap,Release,Sprint,Roles &_Expectations,Sustainable_Pace,Self_Organization,Size &_Skills,Planning &_Estimating,Effective_Meetings,Technical_Practices,Testing,Development_Practices,Release &_Deployment,Effective_Facilitation,Leadership,Impediment_Mgmt.,Leadership,Technical_Expertise,Engagement,Engagement,Backlog_Mgmt.,Tech-debt_Mgmt.,Leadership,Leadership,Develop_People,Process_Imp.,Predictable_Velocity,MTTR,CFR,Test_Automation,Defect_Ratio,Story Cycle_Time,Impediments,Deployment_Frequency,Lead Time_to Deploy,Business_Outcomes,Product_Owner,Team
-8,7,6,7,8,7,6,7,9,8,9,8,7,7,7,7,7,1,8,7,10,9,8,9,0,0,10,9,7,9,8,8,6,9,0,0,0,0,0,9,8,4,0,9,9
-7,6,8,9,7,6,8,7,4,9,6,9,8,7,9,7,0,3,0,5,9,8,7,0,0,0,9,8,7,7,5,5,5,9,0,0,1,0,2,9,8,4,1,0,8
-5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4,9,6,7,8,8,0,0,0,0,5,6,5,9,0,0,2,0,2,7,8,4,0,8,0
-7,9,9,7,9,7,8,7,7,9,8,8,7,7,7,8,6,2,6,6,7,6,6,7,9,7,9,8,7,8,5,5,6,10,0,0,1,9,1,9,8,4,1,0,10
-6,9,8,6,8,7,6,4,7,9,8,9,9,8,8,8,5,0,5,10,7,8,9,8,9,8,8,8,8,8,8,8,8,8,0,0,1,0,1,8,7,3,0,0,9
-9,9,9,8,9,5,7,8,8,9,9,9,8,9,8,9,7,0,7,9,5,8,7,9,10,10,10,9,9,7,10,9,9,10,8,0,0,0,0,9,5,8,0,7,9
-8,9,8,6,10,8,7,4,8,7,8,9,6,8,7,7,0,4,5,8,7,6,6,6,6,6,6,7,6,6,6,6,6,8,5,0,0,0,0,7,0,0,0,0,8
-5,6,6,2,8,5,9,2,9,9,7,9,8,8,8,8,0,0,2,0,8,,,,,,7,,,,,,,,,,,,,,,,,,
-7,9,5,6,6,8,6,6,6,8,7,6,6,7,8,7,0,2,0,0,8,,,,,,9,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,10,,,,,9,,,,,,0,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,10,,,,,6,,,,,,8,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,5,,,,,8,,,,,,8,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,10,,,,,7,,,,,,10,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,10,,,,,6,,,,,,6,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,10,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,0,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,2,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,9,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,5,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,6,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,8,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,4,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,7,,,,,,,,,,,,,,,,,,,,,,,,,,,,,`
+const DATA = `Happiness,Collaboration,Trust &_Respect,Creativity &_Innovation,Accountability,Vision &_Purpose,Goals &_Outcomes,Roadmap,Release,Sprint,Generalizing_Specialists,Sustainable_Pace, Self_Organization,Development_Practices,Planning,Daily Scrum,Review,Retrospective,Effective_Facilitation,Leadership,Impediment_Management,Leadership,Technical_Expertise,Engagement,Engagement,Backlog_Management,Leadership
+8,9,8,8,10,6,7,5,5,6,3,8,7,9,5,8,5,7,6,8,6,9,7,9,7,5,5
+7,8,8,7,10,7,9,6,5,7,4,7,7,7,7,8,4,4,5,9,7,7,7,4,5,6,6
+7,8,7,6,7,5,6,5,7,7,2,6,7,5,6,9,6,5,4,5,2,7,7,6,6,5,5
+8,7,9,5,8,7,8,6,6,7,5,7,7,8,7,10,5,5,8,7,5,5,9,7,8,8,8
+8,10,8,8,10,9,10,8,8,8,0,8,8,3,8,3,5,3,3,5,5,3,8,6,8,9,8
+7,6,7,4,6,4,6,4,4,4,6,4,6,7,6,9,4,6,6,6,7,9,3,3,6,8,6
+8,9,0,9,0,8,8,9,8,8,0,5,8,7,8,9,2,4,7,5,8,6,9,9,8,9,8
+9,9,9,8,9,7,7,8,8,8,5,8,7,8,8,10,7,7,8,8,8,8,8,8,8,8,8
+8,8,9,7,9,6,8,7,7,8,1,7,8,6,8,8,1,7,7,6,9,5,7,0,8,7,7`
+
+const DATA2 = `Happiness,Collaboration,Trust &_Respect,Creativity &_Innovation,Accountability,Vision &_Purpose,Goals &_Outcomes,Roadmap,Release,Sprint,Generalizing Specialists,Sustainable Pace, Self Organization,Development Practices,Planning,Daily Stand-Up,Review,Retrospective,Effective Facilitation,Leadership,Impediment Management,Leadership,Technical Expertise,Engagement,Engagement,Backlog Management,Leadership
+9,8,8,8,7,6,7,7,7,8,7,7,8,4,7,7,6,7,8,8,7,7,7,8,7,7,7
+8,8,9,8,10,8,9,8,8,9,7,7,7,8,8,10,10,10,9,8,9,9,8,8,8,9,8
+7,8,7,9,8,7,8,9,9,8,6,8,8,8,9,8,8,7,7,7,7,7,7,8,8,7,7
+5,7,6,8,8,5,8,5,8,7,7,5,7,7,8,8,8,8,7,5,5,5,5,5,8,9,8
+10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10,10`
 
 const GROUPS = [
-  [5, 'Team Dynamics'],
+  [1, 'Happiness'],
+  [1, 'Collaboration'],
+  [1, 'Trust &_Respect'],
+  [1, 'Creativity &_Innovation'],
+  [1, 'Accountability'],
 
   [2, 'Vision'],
   [3, 'Planning'],
-  [1, 'Roles'],
+  [1, 'Generalizing_Specialists'],
 
-  [5, 'Agility'],
-  [4, 'Technical Excellence'],
-
+  [1, 'Sustainable_Pace'],
+  [1, 'Self_Organization'],
+  [1, 'Development_Practices'],
+  [4, 'Effective_Meeting'],
   [3, 'Team Facilitator'],
-  [3, 'Technical Owner'],
-  [4, 'Product Owner'],
-  [3, 'Management'],
-
-  [1, 'Predict-_ability'],
-  [4, 'Quality'],
-  [2, 'Response_to Change'],
-  [2, 'Time_to Market'],
-  [1, 'Value_Delivered'],
-  [2, 'Confidence'],
+  [3, 'Technical Ownership'],
+  [3, 'Product Ownership'],
 ]
 const CLASSES = [
-  [1, 'CULTURE', '#614d9c'],
+  [5, 'CULTURE', '#614d9c'],
   [3, 'CLARITY', '#da3b31'],
-  [2, 'FOUNDATION', '#3953a0'],
-  [4, 'LEADERSHIP', '#efaa54'],
-  [6, 'PERFORMANCE', '#4f8c4c'],
+  [4, 'FOUNDATION', '#3953a0'],
+  [3, 'LEADERSHIP', '#efaa54'],
+  // [6, 'PERFORMANCE', '#4f8c4c'],
 ]

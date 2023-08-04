@@ -42,6 +42,19 @@
     cols.push(col);
   }
 
+  // rows2 = DATA2.split('\n');
+  // cols2 = []
+  // for(let i = 0; i < rows2.length; i++) {
+  //   rows2[i] = rows2[i].split(',');
+  // }
+  // for(let i = 0; i < nCol; i++) {
+  //   col = [rows2[0][i]];
+  //   for(let j = 1; j < nRow; j++) {
+  //     col.push(parseFloat(rows2?.[j]?.[i] || 0));
+  //   }
+  //   cols2.push(col);
+  // }
+
   /////////////////////////////////////
   svg = document.getElementById("svg");
 
@@ -67,6 +80,7 @@
   /////////////////////////////////////
   // draw points and line
   avgPoints = [];
+  angle = INIT_ANGLE;
   for(let i = 0; i < nCol; i++) {
     angle += dAngle;
     x2 = RR * Math.sin(angle);
@@ -107,15 +121,52 @@
     avgPoints.push([x, y]);
 
     let colAngle = angle - dAngle / 2
-    let colY = RR - 15
+    let colY = RR - 18
     if (colAngle >= Math.PI / 2 && colAngle <= 3 * Math.PI / 2) {
       colAngle += Math.PI;
       colY = -colY + 10;
     }
     // draw col name
-    colName = ColumnName(colY, colAngle, cols[i][0], 10);
+    colName = ColumnName(colY, colAngle, cols[i][0], 14);
     svg.innerHTML += colName;
   }
+
+  // avgPoints2 = [];
+  // angle = INIT_ANGLE;
+  // for(let i = 0; i < nCol; i++) {
+  //   angle += dAngle;
+
+  //   pAngle = angle - dAngle - dpAngle / 2;
+  //   sumVal = 0;
+  //   points = '';
+  //   nonZeroVal = 0;
+
+  //   for(let j = 1; j < nVal; j++) {
+  //     if(cols2[i][j] > 0) {
+  //       nonZeroVal++;
+  //     }
+  //   }
+  //   _dpAngle = dpAngle * nVal / Math.max(nonZeroVal, 1);
+
+  //   for(let j = 1; j <= nVal; j++) {
+  //     if(cols2[i][j] > 0) {        
+  //       pAngle += _dpAngle;
+  //       x = R * Math.sin(pAngle) * cols2[i][j] / MAX;
+  //       y = -R * Math.cos(pAngle) * cols2[i][j] / MAX;
+  //       point = Point(x, y);
+  //       points += point;
+  //       sumVal += cols2[i][j];
+  //     }
+  //   }
+    
+  //   avgVal = sumVal / Math.max(nonZeroVal, 1);
+  //   pAngle = angle - dAngle / 2;
+  //   x = R * Math.sin(pAngle) * avgVal / MAX;
+  //   y = -R * Math.cos(pAngle) * avgVal / MAX;
+  //   avgPoint = AVGPoint(x, y, 'blue');
+  //   // svg.innerHTML += avgPoint;
+  //   avgPoints2.push([x, y]);
+  // }
 
   //draw groups
   angle = INIT_ANGLE;
@@ -186,6 +237,14 @@
     avgLines += line;
   }
   svg.innerHTML += avgLines;
+
+  // avgPoints2.push(avgPoints2[0]);
+  // avgLines2 = '';
+  // for(let i = 1; i <= nCol; i++) {
+  //   line = Line(...avgPoints2[i - 1], ...avgPoints2[i], 2, 'blue');
+  //   avgLines2 += line;
+  // }
+  // svg.innerHTML += avgLines2;
 
 </script>
 </html>

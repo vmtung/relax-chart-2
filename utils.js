@@ -6,8 +6,8 @@ function Point(x, y) {
   return `<circle cx="${x}" cy="${y}" r="3" class="pivot" stroke="black" stroke-width="0" fill="black" />`
 }
 
-function AVGPoint(x, y) {
-  return `<circle cx="${x}" cy="${y}" r="5" class="pivot" stroke="black" stroke-width="0" fill="red" />`
+function AVGPoint(x, y, color = 'red') {
+  return `<circle cx="${x}" cy="${y}" r="5" class="pivot" stroke="black" stroke-width="0" fill="${color}" />`
 }
 
 function CircleLabel(x, y, txt) {
